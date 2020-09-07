@@ -1,0 +1,12 @@
+Need to fix following error when running the program:
+
+Exception in thread "main" java.lang.NumberFormatException: For input string: ""WAP (feat. Megan Thee Stallion)""
+	at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:2054)
+	at java.base/jdk.internal.math.FloatingDecimal.parseDouble(FloatingDecimal.java:110)
+	at java.base/java.lang.Double.parseDouble(Double.java:543)
+	at Lab_1.setUpMyCSVArray(Lab_1.java:54)
+	at Lab_1.main(Lab_1.java:89)
+  
+  Cunclusion: Program is having problems reading different variable types into an array!
+  
+  Need to find a work around to the problem!
