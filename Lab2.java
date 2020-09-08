@@ -1,40 +1,49 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
+import  java.io.PrintWriter;
 
 public class Lab_1 
 {
-	static double [][] myArray;
-
+	static double [][] myCSVArray;
+	
+	public static void main(String[] args) throws IOException
+	{
+		setUpMyCSVArray();
+		printMyCSVArray();
+		outputMyCSVArray();
+	
+	}
+	
 	static void setUpMyCSVArray()
 	{
 		
-		
-		myArray = new double [201][5];
+		myCSVArray = new double [200][5];
 		
 		Scanner scanIn = null;
-		int Rowc = 0;
-		int Colc = 0;
+		int Row = 0;
+		int Col = 0;
 		String InputLine = "";
 		String CSVFile;
 		
 		CSVFile = "C:\\Users\\Andrew Diaz\\Desktop\\Spotify_CSVFile.txt";
 		
-		
 		try
 		{
 			@SuppressWarnings("resource")
-			BufferedReader br = new BufferedReader(new FileReader(CSVFile));
+			BufferedReader bufferedreader = new BufferedReader(new FileReader(CSVFile));
 			
-			while((InputLine = br.readLine()) != null) 
+			while((InputLine = bufferedreader.readLine()) != null) 
 			{
 				System.out.println(InputLine);
 			}
 
-			
+			 // Row = Integer.parseInt(InputLine);
+
 			//setup a scanner
 			scanIn = new Scanner(new BufferedReader(new FileReader(CSVFile)));
 			
@@ -48,18 +57,16 @@ public class Lab_1
 				String [] InArray = InputLine.split(",");
 				
 				//copy the content of the inArray to the myArray
-				for (Colc = 0; Colc < InArray.length; Colc++)
+				for (Col = 0; Col < InArray.length; Col++)
 				{
-					myArray [Rowc][Colc] = Double.parseDouble(InArray[Colc]);
+					myCSVArray [Row][Col] = Double.parseDouble(InArray[Col]);
 				}
 				//Increment the row in the array
-				Rowc++;
+				Row++;
 			}
-			
 			
 		}
 	
-		
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
@@ -68,18 +75,41 @@ public class Lab_1
 		{
 			e.printStackTrace();
 		}
+	
+		catch (NumberFormatException e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 
-
-	
-	
-	public static void main(String[] args)
+	static void printMyCSVArray()
 	{
 		
-		
-		
-
+		//print the array
+		for (int Row = 0; Row < 201; Row++)
+		{
+			
+			for (int Col = 0; Col < 5; Col++)
+			{
+				System.out.print(myCSVArray[Row][Col] + " ");
+			}
+		}
+		System.out.println();
 	
 	}
+
+	static void outputMyCSVArray() throws IOException
+	{
+		File output = new File("Output.txt");
+		FileWriter fileWriter = new FileWriter(output);
+		PrintWriter printWriter = new PrintWriter(fileWriter);
+		
+		printWriter.print(myCSVArray);
+		
+		printWriter.close();
+		
+	}
+
 }
+
